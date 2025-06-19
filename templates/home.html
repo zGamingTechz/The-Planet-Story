@@ -382,14 +382,14 @@
 
         <div class="solar-system">
             <div class="sun"></div>
-            <div class="planet mercury" data-name="Mercury" onclick="selectPlanet('mercury')"></div>
-            <div class="planet venus" data-name="Venus" onclick="selectPlanet('venus')"></div>
-            <div class="planet earth" data-name="Earth" onclick="selectPlanet('earth')"></div>
-            <div class="planet mars" data-name="Mars" onclick="selectPlanet('mars')"></div>
-            <div class="planet jupiter" data-name="Jupiter" onclick="selectPlanet('jupiter')"></div>
-            <div class="planet saturn" data-name="Saturn" onclick="selectPlanet('saturn')"></div>
-            <div class="planet uranus" data-name="Uranus" onclick="selectPlanet('uranus')"></div>
-            <div class="planet neptune" data-name="Neptune" onclick="selectPlanet('neptune')"></div>
+            <div class="planet mercury" data-name="Mercury" onclick="selectPlanet('Mercury')"></div>
+            <div class="planet venus" data-name="Venus" onclick="selectPlanet('Venus')"></div>
+            <div class="planet earth" data-name="Earth" onclick="selectPlanet('Earth')"></div>
+            <div class="planet mars" data-name="Mars" onclick="selectPlanet('Mars')"></div>
+            <div class="planet jupiter" data-name="Jupiter" onclick="selectPlanet('Jupiter')"></div>
+            <div class="planet saturn" data-name="Saturn" onclick="selectPlanet('Saturn')"></div>
+            <div class="planet uranus" data-name="Uranus" onclick="selectPlanet('Uranus')"></div>
+            <div class="planet neptune" data-name="Neptune" onclick="selectPlanet('Neptune')"></div>
         </div>
     </div>
 
@@ -458,8 +458,9 @@
                 createParticle(centerX, centerY);
             }
 
-            // Redirect to the Flask route
-            window.location.href = `/${planetName}`;
+            setTimeout(() => {
+                window.location.href = `/${planetName.toLowerCase()}`;
+            }, 300);
         }
 
 
