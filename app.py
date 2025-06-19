@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask("Planet_Story")
@@ -18,7 +18,22 @@ def home_screen():
 
 @app.route("/jupiter", methods=["GET", "POST"])
 def jupiter_story():
-    return render_template("jupiter.html")
+    story = [
+        "Part 1",
+        "Part 2",
+        "Part 3",
+        "Part 4",
+    ]
+
+    if request.method == "POST":
+        data = request.get_json()
+        story_part = data.get("story_part")
+
+        return jsonify({
+            "text": story[story_part]
+        })
+
+    return render_template("jupiter.html", story = story[0])
 
 
 if __name__ == "__main__":

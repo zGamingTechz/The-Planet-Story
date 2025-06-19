@@ -346,7 +346,7 @@
 
         <div class="story-interface">
             <div class="story-text" id="storyText">
-                Welcome to Jupiter's domain, traveler. The gas giant's storms have been raging for centuries, and ancient secrets lie hidden within its swirling clouds. Your journey begins now...
+                {{ story }}
             </div>
 
             <div class="story-controls">
@@ -429,13 +429,13 @@
 
             try {
                 // Make request to Flask backend
-                const response = await fetch('/jupiter_story', {
+                const response = await fetch('/jupiter', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        story_part: currentStoryPart + 1
+                        story_part: currentStoryPart
                     })
                 });
 
@@ -503,7 +503,7 @@
 
         // Navigate back to home
         function goHome() {
-            window.location.href = '/';  // Adjust this URL based on your Flask routing
+            window.location.href = '/';
         }
 
         // Initialize
