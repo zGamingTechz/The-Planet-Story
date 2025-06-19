@@ -16,5 +16,10 @@ def home_screen():
     return render_template("home.html")
 
 
+@app.route("/jupiter", methods=["GET", "POST"])
+def jupiter_story():
+    return render_template("jupiter.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
