@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Planet Files</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #00ffff 0%, #0080ff 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff, 0 0 60px #00ffff;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("{{ url_for('static', filename='Title.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            text-align: center;
+            background: linear-gradient(45deg, #00ffff, #0080ff, #8000ff, #ff0080, #ffff00);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .play-button {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 700;
+            padding: 1rem 3rem;
+            background: linear-gradient(45deg, #00ffff, #0080ff);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .play-button:hover::before {
+            left: 100%;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+        }
+
+        .play-button:active {
+            transform: scale(0.95);
+        }
+
+        .credits {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        .made-by {
+            font-weight: 700;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            font-size: 0.9em;
+            opacity: 0.6;
+        }
+
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .floating-planet {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #ff6b6b, #ee5a24);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            to {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .glow-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            animation: pulse 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.1; }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+            }
+
+            .play-button {
+                font-size: 1.5rem;
+                padding: 0.8rem 2rem;
+            }
+
+            .credits {
+                bottom: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <div class="background"></div>
+    <div class="stars"></div>
+    <div class="glow-effect"></div>
+    <div class="floating-elements"></div>
+
+    <div class="container">
+        <h1 class="title">THE PLANET FILES</h1>
+        <p class="subtitle">Explore the Mysteries of the Universe</p>
+        <form action="/" method="POST">
+            <button type="submit" class="play-button">Play Game</button>
+        </form>
+    </div>
+
+    <div class="credits">
+        <div class="made-by">Created by Bhavya, Anukriti & Divya</div>
+        <div class="copyright">© 2025 The Planet Files. All rights reserved.</div>
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundjay.com/misc/sounds/space-music.mp3" type="audio/mpeg">
+        <!-- Fallback ambient space sound -->
+    </audio>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let musicStarted = false;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            // Start music on first mouse movement
+            if (!musicStarted) {
+                const audio = document.getElementById('backgroundMusic');
+                audio.volume = 0.3;
+                audio.play().catch(e => {
+                    // Fallback: create a simple ambient sound using Web Audio API
+                    createAmbientSound();
+                });
+                musicStarted = true;
+            }
+        });
+
+        function updateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(updateCursor);
+        }
+        updateCursor();
+
+        // Create ambient sound using Web Audio API as fallback
+        function createAmbientSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator1 = audioContext.createOscillator();
+                const oscillator2 = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator1.frequency.setValueAtTime(220, audioContext.currentTime);
+                oscillator2.frequency.setValueAtTime(110, audioContext.currentTime);
+                oscillator1.type = 'sine';
+                oscillator2.type = 'sine';
+
+                gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+
+                oscillator1.connect(gainNode);
+                oscillator2.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator1.start();
+                oscillator2.start();
+
+                // Add some modulation for ambient effect
+                const lfo = audioContext.createOscillator();
+                const lfoGain = audioContext.createGain();
+                lfo.frequency.setValueAtTime(0.1, audioContext.currentTime);
+                lfoGain.gain.setValueAtTime(10, audioContext.currentTime);
+                lfo.connect(lfoGain);
+                lfoGain.connect(oscillator1.frequency);
+                lfo.start();
+            } catch (error) {
+                console.log('Audio not supported');
+            }
+        }
+
+        // Generate random stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Generate floating planets
+        function createFloatingPlanets() {
+            const container = document.querySelector('.floating-elements');
+            for (let i = 0; i < 5; i++) {
+                const planet = document.createElement('div');
+                planet.className = 'floating-planet';
+                planet.style.left = Math.random() * 100 + '%';
+                planet.style.animationDelay = Math.random() * 20 + 's';
+                planet.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(planet);
+            }
+        }
+
+        // Initialize
+        createStars();
+        createFloatingPlanets();
+
+        // Button hover effects
+        const playButton = document.querySelector('.play-button');
+        playButton.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(1.5)';
+        });
+
+        playButton.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+        });
+
+        // Add particle effect on click
+        playButton.addEventListener('click', (e) => {
+            for (let i = 0; i < 20; i++) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = '#00ffff';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '10000';
+            document.body.appendChild(particle);
+
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = 2 + Math.random() * 4;
+            const vx = Math.cos(angle) * velocity;
+            const vy = Math.sin(angle) * velocity;
+
+            let px = x, py = y;
+            let opacity = 1;
+
+            function animate() {
+                px += vx;
+                py += vy;
+                opacity -= 0.02;
+
+                particle.style.left = px + 'px';
+                particle.style.top = py + 'px';
+                particle.style.opacity = opacity;
+
+                if (opacity > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    particle.remove();
+                }
+            }
+
+            animate();
+        }
+    </script>
+</body>
+</html>
