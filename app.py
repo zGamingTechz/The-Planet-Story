@@ -97,5 +97,23 @@ def jupiter_story():
     return render_template("jupiter.html", story = story[0])
 
 
+@app.route("/mercury", methods=["GET", "POST"])
+def mercury_story():
+    story = [
+        "1",
+        "2"
+    ]
+
+    if request.method == "POST":
+        data = request.get_json()
+        story_part = data.get("story_part")
+
+        return jsonify({
+            "text": story[story_part]
+        })
+
+    return render_template("mercury.html", story = story[0])
+
+
 if __name__ == "__main__":
     app.run(debug=True)
