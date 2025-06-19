@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth's Story - Solar System Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #001122 0%, #003366 50%, #004488 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: twinkle 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .planet-title {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #4A90E2;
+            text-shadow: 0 0 20px #27AE60;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .planet-visual {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #4A90E2 0%, #27AE60 40%, #2ECC71 100%);
+            border-radius: 50%;
+            margin: 2rem auto;
+            box-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+        }
+
+        .planet-visual::before {
+            content: '';
+            position: absolute;
+            top: 25%;
+            left: 15%;
+            width: 80px;
+            height: 40px;
+            background: rgba(39, 174, 96, 0.8);
+            border-radius: 50%;
+            transform: rotate(-15deg);
+        }
+
+        .planet-visual::after {
+            content: '';
+            position: absolute;
+            top: 55%;
+            right: 20%;
+            width: 60px;
+            height: 30px;
+            background: rgba(46, 204, 113, 0.6);
+            border-radius: 50%;
+            transform: rotate(20deg);
+        }
+
+        .story-container {
+            flex: 1;
+            background: rgba(20, 20, 30, 0.9);
+            backdrop-filter: blur(15px);
+            border-top: 2px solid #4A90E2;
+            border-radius: 30px 30px 0 0;
+            margin: 0 1rem;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .home-btn {
+            background: rgba(74, 144, 226, 0.2);
+            border: 2px solid rgba(74, 144, 226, 0.5);
+            color: #4A90E2;
+            padding: 12px 24px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-btn:hover {
+            background: rgba(74, 144, 226, 0.4);
+            transform: scale(1.05);
+        }
+
+        .progress-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-bar {
+            width: 150px;
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4A90E2, #27AE60);
+            width: 16%;
+            transition: width 0.8s ease;
+        }
+
+        .progress-text {
+            color: #4A90E2;
+            font-weight: bold;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #4A90E2, #27AE60);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+        }
+
+        .next-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.5);
+        }
+
+        .next-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .planet-title {
+                font-size: 2.5rem;
+            }
+            
+            .planet-visual {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .progress-section {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1 class="planet-title">EARTH'S STORY</h1>
+            <div class="planet-visual"></div>
+        </div>
+        
+        <div class="story-container">
+            <div class="story-content" id="storyContent">
+                Welcome home, explorer. Earth, our blue marble, is the only known planet with life in the universe. This perfect oasis in the cosmic desert holds secrets that have taken billions of years to unfold...
+            </div>
+            
+            <div class="navigation">
+                <a href="index.html" class="home-btn">
+                    🏠 HOME
+                </a>
+                
+                <div class="progress-section">
+                    <span class="progress-text">Progress:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">1/6</span>
+                </div>
+                
+                <button class="next-btn" id="nextBtn" onclick="nextStory()">
+                    NEXT →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const stories = [
+            {
+                content: "Welcome home, explorer. Earth, our blue marble, is the only known planet with life in the universe. This perfect oasis in the cosmic desert holds secrets that have taken billions of years to unfold...",
+                progress: 16
+            },
+            {
+                content: "Earth, our blue marble, is the only known planet with life. Its perfect distance from the Sun, liquid water, and protective atmosphere create the ideal conditions for the incredible diversity of life we see today.",
+                progress: 33
+            },
+            {
+                content: "Earth's atmosphere is 78% nitrogen and 21% oxygen, with the oxygen produced by billions of years of photosynthesis by plants and algae. This oxygen-rich atmosphere is unique in our solar system.",
+                progress: 50
+            },
+            {
+                content: "The planet's magnetic field, generated by its molten iron core, protects us from harmful solar radiation and cosmic rays. Without this invisible shield, life as we know it could not exist.",
+                progress: 66
+            },
+            {
+                content: "Earth's surface is 71% water, and this water cycle - evaporation, condensation, and precipitation - helps regulate global temperatures and weather patterns that support life everywhere from the deepest oceans to the highest mountains.",
+                progress: 83
+            },
+            {
+                content: "Earth is the only planet we know of that has plate tectonics - the movement of large sections of the planet's surface. This process recycles carbon and helps maintain stable temperatures over geological time, making our world a living, breathing planet.",
+                progress: 100
+            }
+        ];
+
+        let currentStoryIndex = 0;
