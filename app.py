@@ -13,7 +13,7 @@ def title_screen():
 
 @app.route("/home", methods=["GET", "POST"])
 def home_screen():
-    return "Home"
+    return render_template("home.html")
 
 
 if __name__ == "__main__":
