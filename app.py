@@ -189,7 +189,40 @@ def mars_story():
         "Mars: (softly) Then maybe I’m not just a dead rock... maybe I’m a promise.",
         "Narrator: Among giants and flames, Mars stands small... but not forgotten.",
         "Narrator: Its cold winds carry ancient whispers, and its soil cradles secrets yet to be found.",
-        "Narrator: Though dry and distant, Mars holds a beating heart beneath its barren crust — waiting, always waiting, for someone to listen."
+        "Narrator: Though dry and distant, Mars holds a beating heart beneath its barren crust — waiting, always waiting, for someone to listen.",
+
+        "Mars: Sometimes, I dream. Of rivers that ran like veins. Of skies that weren't always empty.",
+        "Mars: Olympus Mons... I used to think I was mighty, towering. Now I just feel exposed.",
+        "Saturn: The tallest mountain in the system, and yet you sound... grounded.",
+        "Mars: Altitude doesn't stop loneliness. You’d be surprised what thin air does to thoughts.",
+        "Venus: I get it. When no one lands and stays... it makes you question your worth.",
+        "Earth: You’re not forgotten, Mars. They talk about you more than any of us.",
+        "Mars: Talk is nice. But warmth would be better.",
+        "Jupiter: Warmth may return. One day. Perhaps your silence is just... preparation.",
+        "Mars: You really think so?",
+        "Jupiter: I’ve seen orbits swing. Things that were cold... can burn bright again.",
+        "Mercury: Maybe you’re just waiting for your season.",
+        "Mars: (smirks) My seasons are chaos. Dust storms. Dips below freezing. But I’m still here.",
+        "Narrator: Four billion years, and Mars hasn’t stopped spinning.",
+        "Mars: I’ve been hit. Scarred. Stripped of my shield. But I’m still standing.",
+        "Saturn: Your core may be cold, but your will is molten.",
+        "Venus: And if they do find life in your soil... it means you were never truly alone.",
+        "Mars: (quietly) I hope so. I hope something remembers me... even if I forget myself.",
+        "Earth: I’ll remember. You’ve always been my twin in silence.",
+        "Mars: Then maybe silence isn't so empty. Maybe it's just... listening without rushing.",
+        "Mercury: (grinning) That’s deep for a rock full of craters.",
+        "Mars: (smiling faintly) And you’re shallow for someone so close to the Sun.",
+        "Narrator: The planets laugh — not mockingly, but softly. Together. Understanding Mars now in ways they never did before.",
+        "Narrator: He may not shine like Earth, nor swirl like Jupiter, but Mars carries something none of them do: patience.",
+        "Mars: I don’t need applause. Just... a visit now and then.",
+        "Jupiter: They’ll come. And when they do, you’ll be ready.",
+        "Mars: I’ll wait. I always have.",
+
+        "Narrator: Mars once had rivers, lakes, even an atmosphere. But solar winds stripped its protection over time.",
+        "Narrator: Olympus Mons — the tallest volcano in the solar system — still rises over its red terrain.",
+        "Narrator: Though dry now, Mars shows signs of ancient water — channels, deltas, and ice beneath the surface.",
+        "Narrator: Dust storms on Mars can cover the entire planet. Yet its silence speaks volumes.",
+        "Narrator: It may seem lifeless today, but Mars remains our best hope for finding life beyond Earth."
     ]
 
     if request.method == "POST":
