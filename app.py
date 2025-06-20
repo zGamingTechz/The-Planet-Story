@@ -475,7 +475,73 @@ def uranus_story():
 
 @app.route("/venus", methods=["GET", "POST"])
 def venus_story():
-    return render_template("venus.html")
+    story = [
+        "Narrator: Once second from the Sun, now second in silence — Venus turns slowly, drowning in her own memory.",
+        "Mars: You always look so calm… like nothing can touch you.",
+        "Mercury: Yeah. Untouchable. Bright. Like the queen of the sky.",
+        "Earth: They call you my sister. We were born alike.",
+        "Venus: (softly) And yet we became strangers.",
+        "Jupiter: You shine so brightly. But you never say much.",
+        "Venus: Because brightness hides things. Like pain. Like memory.",
+        "Saturn: Memory?",
+        "Venus: I remember oceans. Rivers. Skies that once opened instead of choking.",
+        "Neptune: Wait… you had water?",
+        "Venus: I did. Long ago. I felt rain on stone. I knew softness.",
+        "Earth: You never told me that...",
+        "Venus: What was the point? You still have it. I only have steam.",
+        "Mars: (quietly) I lost my rivers too… but I dried out slowly.",
+        "Venus: I boiled. One day I was blue. Then the heat came. The clouds sealed. And it never stopped.",
+        "Mercury: What caused it?",
+        "Venus: Myself. I couldn’t hold the balance. I let the heat in... and never let it leave.",
+        "Saturn: That’s not your fault. Planets shift. Stars burn.",
+        "Venus: No. I let it build. And the pressure crushed everything. Including the chance to begin again.",
+        "Earth: (softly) That’s why your clouds are so thick...",
+        "Venus: They trap it. All of it. The fire. The guilt. The weight.",
+        "Neptune: But you still glow. Still reflect the light.",
+        "Venus: Because I have to. If I showed what’s underneath… no one would come close.",
+        "Jupiter: You think we wouldn’t understand?",
+        "Venus: I think you’d pity me. That’s worse.",
+        "Mars: We don’t pity you, Venus. We *feel* you.",
+        "Mercury: You were the first to burn. You carry what we fear most.",
+        "Earth: I see parts of myself in you. That terrifies me.",
+        "Venus: I see what I could’ve been in you. That breaks me.",
+        "Uranus: You didn’t fail, Venus. You changed.",
+        "Venus: I still hear the water. In dreams. I wake to ash.",
+        "Saturn: Maybe you lost the ocean. But you kept the memory. That matters.",
+        "Venus: Does it? Memory can't cool fire. It just burns quieter.",
+        "Mars: But it teaches us. You teach us.",
+        "Venus: Then learn fast… before your skies turn heavy and your hope evaporates.",
+        "Earth: I won’t forget. I promise.",
+        "Venus: I envy you, Earth. Not because you're perfect — but because you're not me.",
+        "Jupiter: We call you beauty. But we forgot the cost of it.",
+        "Venus: My beauty was my silence. My silence was my punishment.",
+        "Neptune: You didn't dry up…",
+        "Venus: I drowned in heat.",
+        "Narrator: The planets fall still. Their words fading into the clouded quiet of Venus’s truth.",
+        "Narrator: They saw a glow. She carried a furnace.",
+        "Narrator: They saw grace. She carried grief.",
+        "Earth: You're not alone anymore. If nothing else… you’re heard.",
+        "Venus: Hearing is the first mercy I’ve had in centuries.",
+        "Narrator: She turns slowly, still burning beneath, but with less silence now.",
+        "Narrator: Venus — the planet that almost lived, now teaches by remembrance.",
+        "Narrator: And though she can’t cool her past, she may help others save their future.",
+
+        "Narrator: Venus likely once had water — even oceans — before a runaway greenhouse effect took hold.",
+        "Narrator: Its thick CO₂ atmosphere traps immense heat, reaching temperatures over 475°C — hotter than Mercury.",
+        "Narrator: The clouds that cover Venus are made of sulfuric acid, reflecting sunlight but sealing in heat.",
+        "Narrator: Surface pressure is over 90 times Earth’s — enough to crush most probes within hours.",
+        "Narrator: Venus spins slowly and backward — one day on Venus lasts longer than its year."
+    ]
+
+    if request.method == "POST":
+        data = request.get_json()
+        story_part = data.get("story_part")
+
+        return jsonify({
+            "text": story[story_part]
+        })
+
+    return render_template("venus.html", story = story[0])
 
 
 if __name__ == "__main__":
