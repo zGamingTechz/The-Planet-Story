@@ -158,7 +158,49 @@ def mercury_story():
 
 @app.route("/earth", methods=["GET", "POST"])
 def earth_story():
-    return render_template("earth.html")
+    story = [
+        "Narrator: Spinning in just the right place, wrapped in blue and green and clouded breath — Earth glows, alive among the cold giants and fiery hearts.",
+        "Mars: Look at you, Earth. So alive. So lucky.",
+        "Venus: A masterpiece. Gentle air, flowing water, dancing light. You're everything we once were… or could have been.",
+        "Mercury: The favorite child of the Sun.",
+        "Earth: (softly) Favorite… maybe. But not untouched.",
+        "Jupiter: You speak like you're in pain.",
+        "Earth: I am. Not always. But more and more.",
+        "Saturn: How could that be? You’re thriving. Life sings on your skin.",
+        "Earth: Yes. And it also scars me.",
+        "Neptune: The humans?",
+        "Earth: (pauses) They’re part of me. My miracle. My mistake. My hope.",
+        "Mars: You gave them everything — warmth, food, oceans. They built homes, dreams, rockets…",
+        "Earth: And walls. Weapons. Fires that never needed to be lit. Forests turned to memory. Skies once blue now choking.",
+        "Venus: (quietly) I know how it feels… when the heat builds and no one listens.",
+        "Earth: I try to warn them. With storms. With silence. With rising tides. But they keep going — faster than I can heal.",
+        "Mercury: Do they love you?",
+        "Earth: Some do. Fiercely. They plant, they clean, they cry when glaciers fall. But others… they pretend I’ll never break.",
+        "Saturn: Even the strongest body can fracture when ignored.",
+        "Earth: I cradle life. I dance with balance. But lately... it feels like I'm swaying too close to the edge.",
+        "Jupiter: You shouldn't carry this alone. What can we do?",
+        "Earth: Just remember me. Remind them — their only home floats in a fragile cradle. I am not infinite.",
+        "Mars: I remember your rivers. I wanted to be like you. Still do.",
+        "Venus: I remember the warmth… before it became a prison. Don’t let them turn yours into one too.",
+        "Earth: I hope I can still reach them. Before the silence I fear becomes real.",
+        "Narrator: The planets gaze at Earth — no longer just beautiful, but brave. Bearing life, bearing damage, and still spinning in grace.",
+        "Neptune: She breathes life, and yet she chokes.",
+        "Saturn: She nurtures, and yet she’s neglected.",
+        "Jupiter: But she still spins — because hope is her gravity.",
+        "Narrator: And so, Earth — the only world known to bloom — carries on. Not as a perfect sphere, but as a pleading heart in orbit.",
+        "Narrator: She is not just where life exists — she is life, itself.",
+        "Narrator: And though she hurts… she has not given up. Not yet."
+    ]
+
+    if request.method == "POST":
+        data = request.get_json()
+        story_part = data.get("story_part")
+
+        return jsonify({
+            "text": story[story_part]
+        })
+
+    return render_template("earth.html", story = story[0])
 
 
 @app.route("/mars", methods=["GET", "POST"])
