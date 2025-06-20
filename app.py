@@ -163,7 +163,44 @@ def earth_story():
 
 @app.route("/mars", methods=["GET", "POST"])
 def mars_story():
-    return render_template("mars.html")
+    story = [
+        "Narrator: Farther out, beyond Earth’s soft blues, a red dot watches — dusty, dry, and quietly defiant.",
+        "Mars: (mocking Mercury) Look at you all, bickering over heat. Try being cold for once.",
+        "Mercury: (grinning) Oh, here comes the rust bucket. Got sand in your orbit again?",
+        "Mars: (smirks) Better sand than solar tantrums. At least I don’t melt my guests.",
+        "Earth: (teasing) But you scare them off! So many missions... and still no one stays.",
+        "Mars: (quietly) They try. And I wait. Every time.",
+        "Venus: (softly) That must be lonely.",
+        "Mars: I got used to it. Solitude teaches you things... like silence. And strength.",
+        "Jupiter: You always seemed like the tough one.",
+        "Mars: I am. But tough doesn’t mean unbreakable.",
+        "Saturn: You hide it well. The storms. The scars. The dust devils whispering across your skin.",
+        "Mars: You think I’m red from rust? I’m red from battles — with time, with cold, with emptiness.",
+        "Mercury: Damn... that hit different.",
+        "Mars: I’ve had water once. Mountains taller than any on Earth. Canyons deeper than your fears. I remember... but barely.",
+        "Earth: You sound like someone who’s lost things.",
+        "Mars: I have. Rivers. Warmth. A chance to be like you. Now all I have are echoes.",
+        "Venus: You deserve more than echoes.",
+        "Mars: I’ll get there. One rover at a time. They keep coming. They look for life. Maybe someday... I’ll feel alive again.",
+        "Narrator: The planets grow quiet, no longer laughing — listening instead to the dust-covered dreamer.",
+        "Mars: I don’t want pity. Just... maybe next time, ask why I’m quiet, not how I got so red.",
+        "Jupiter: You’ve got fight in you, Mars. That’s worth more than warmth.",
+        "Earth: And hope. You never stopped waiting. That’s what makes you special.",
+        "Mars: (softly) Then maybe I’m not just a dead rock... maybe I’m a promise.",
+        "Narrator: Among giants and flames, Mars stands small... but not forgotten.",
+        "Narrator: Its cold winds carry ancient whispers, and its soil cradles secrets yet to be found.",
+        "Narrator: Though dry and distant, Mars holds a beating heart beneath its barren crust — waiting, always waiting, for someone to listen."
+    ]
+
+    if request.method == "POST":
+        data = request.get_json()
+        story_part = data.get("story_part")
+
+        return jsonify({
+            "text": story[story_part]
+        })
+
+    return render_template("mars.html", story = story[0])
 
 
 @app.route("/neptune", methods=["GET", "POST"])
