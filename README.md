@@ -59,5 +59,3 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 Made with ❤️ and teamwork during a 48-hour hackathon.
-
-```
