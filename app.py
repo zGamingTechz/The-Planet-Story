@@ -404,7 +404,73 @@ def saturn_story():
 
 @app.route("/uranus", methods=["GET", "POST"])
 def uranus_story():
-    return render_template("uranus.html")
+    story = [
+        "Narrator: Alone in the cold beyond Saturn, one planet spins — not upright, but sideways. Unbothered. Or so it seems.",
+        "Mars: (squinting) Yo, Uranus is sideways again. Someone get him a cosmic chiropractor.",
+        "Mercury: (grinning) Seriously, how do you even *spin* like that?",
+        "Venus: It’s like he’s always... drifting. Like he’s avoiding us.",
+        "Jupiter: (concerned) He’s not avoiding. That’s just how he’s always been.",
+        "Neptune: (quietly) Not always.",
+        "Uranus: (enters, slow) You talk like I chose this.",
+        "Earth: We didn’t mean it like that... We just don’t understand you.",
+        "Uranus: That’s the point. You never tried to.",
+        "Saturn: We assumed you were... private. Eccentric.",
+        "Uranus: No. You assumed I was strange. Broken. Off.",
+        "Mars: (awkwardly) I mean... you *are* tilted 98 degrees.",
+        "Uranus: Do you know *why* I tilt? Why I orbit like I'm wounded?",
+        "Mercury: No one ever said—",
+        "Uranus: Because no one ever asked.",
+        "Jupiter: Then tell us. What happened?",
+        "Uranus: A long time ago... I was hit. Hard. By something massive.",
+        "Uranus: It changed me. Threw me sideways. Spun me into someone I didn’t recognize.",
+        "Venus: (softly) You were... hurt?",
+        "Uranus: Not just hurt. Rewritten.",
+        "Saturn: That’s why your moons spin like you... why your rings orbit at your side.",
+        "Neptune: Why your core stays cold. Closed off.",
+        "Uranus: I didn’t just fall. I had to *learn* to spin again.",
+        "Earth: You were quiet all this time... hiding that?",
+        "Uranus: I wasn’t hiding. I was surviving.",
+        "Mars: Damn... and we just called you weird.",
+        "Mercury: I'm sorry, man. We joke too much. Didn’t realize you were carrying that.",
+        "Uranus: I don’t want pity. Just... space to exist without being mocked.",
+        "Venus: You’ve had it harder than any of us... and you never said a word.",
+        "Uranus: Words felt too small. When you’ve been struck by a planet... silence feels safer.",
+        "Saturn: You're not broken, Uranus. You’re *resilient*.",
+        "Neptune: You kept orbiting. That's more than most would do.",
+        "Earth: You're still part of this family. Tilted or not.",
+        "Uranus: I used to wish I could spin like you. Stand tall. Straight. 'Normal.'",
+        "Uranus: But now... I just spin anyway.",
+        "Jupiter: That’s all any of us really do. Just spin through it.",
+        "Mars: You made your own gravity, sideways and all. That’s kinda badass.",
+        "Uranus: (smiles faintly) I guess... I just wanted to be understood.",
+        "Narrator: The planets fall silent, not with shame — but with understanding.",
+        "Narrator: They once saw a punchline. Now they see a survivor.",
+        "Venus: We’ll stop calling you the odd one.",
+        "Saturn: From now on, you’re not 'off.' You're unique. And strong.",
+        "Neptune: You didn’t fall apart. You realigned.",
+        "Earth: You may spin different... but you never stopped spinning.",
+        "Uranus: (softly) Maybe being sideways... isn’t so wrong after all.",
+        "Narrator: In the cold, tilted twilight, Uranus keeps spinning — not as a misfit, but as a monument.",
+        "Narrator: To trauma. To adaptation. To finding rhythm in the wreckage.",
+        "Narrator: He is not the loudest. Not the brightest. But he is proof... that damage isn't the end.",
+
+        # SCIENCE FACTS
+        "Narrator: Uranus spins on its side — with a 98-degree axial tilt — likely due to a massive early impact.",
+        "Narrator: Its moons and rings orbit along this tilted axis, following Uranus’s strange path.",
+        "Narrator: Unlike most planets, Uranus radiates almost no internal heat — possibly due to a disrupted core.",
+        "Narrator: It’s the coldest planet in the solar system, with temperatures dropping below -220°C.",
+        "Narrator: But despite its tilt and silence, Uranus remains in perfect orbit — steady, strange, and unshaken."
+    ]
+
+    if request.method == "POST":
+        data = request.get_json()
+        story_part = data.get("story_part")
+
+        return jsonify({
+            "text": story[story_part]
+        })
+
+    return render_template("uranus.html", story = story[0])
 
 
 @app.route("/venus", methods=["GET", "POST"])
