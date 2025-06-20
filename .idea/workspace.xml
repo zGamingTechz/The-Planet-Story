@@ -8,7 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/ThePlanetStory.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ThePlanetStory.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/templates/mercury.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/mercury.html" afterDir="false" />
+>>>>>>> d9f30763e975566fe5daa6c15917c8a5c8324161
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +48,14 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "Python.app.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< HEAD
     "git-widget-placeholder": "planets",
     "node.js.selected.package.tslint": "(autodetect)"
+=======
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true"
+>>>>>>> d9f30763e975566fe5daa6c15917c8a5c8324161
   }
 }]]></component>
   <component name="SharedIndexes">

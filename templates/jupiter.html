@@ -189,6 +189,23 @@
             border-radius: 10px;
             border: 1px solid rgba(0, 255, 255, 0.3);
             color: #e0e0e0;
+            position: relative;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: #00ffff;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            position: relative;
+            top: 0.1em;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         .story-controls {
@@ -346,7 +363,7 @@
 
         <div class="story-interface">
             <div class="story-text" id="storyText">
-                Welcome to Jupiter's domain, traveler. The gas giant's storms have been raging for centuries, and ancient secrets lie hidden within its swirling clouds. Your journey begins now...
+                {{ story }}
             </div>
 
             <div class="story-controls">
@@ -405,7 +422,44 @@
 
         // Story management
         let currentStoryPart = 1;
-        let totalParts = 10; // You can adjust this based on your story length
+        let totalParts = 65;
+        let isTyping = false;
+
+        // Typing animation function
+        function typeText(element, text, speed = 30) {
+            return new Promise((resolve) => {
+                isTyping = true;
+                element.innerHTML = '';
+                let i = 0;
+
+                // Add cursor
+                const cursor = document.createElement('span');
+                cursor.className = 'typing-cursor';
+                element.appendChild(cursor);
+
+                function typeChar() {
+                    if (i < text.length) {
+                        // Insert character before cursor
+                        const textNode = document.createTextNode(text.charAt(i));
+                        element.insertBefore(textNode, cursor);
+                        i++;
+
+                        // Variable speed for more natural typing
+                        const nextSpeed = speed + Math.random() * 20;
+                        setTimeout(typeChar, nextSpeed);
+                    } else {
+                        // Remove cursor when done
+                        setTimeout(() => {
+                            cursor.remove();
+                            isTyping = false;
+                            resolve();
+                        }, 500);
+                    }
+                }
+
+                typeChar();
+            });
+        }
 
         // Button hover effects
         document.querySelectorAll('.next-btn, .home-btn').forEach(element => {
@@ -420,6 +474,8 @@
 
         // Story progression function
         async function nextStory() {
+            if (isTyping) return; // Prevent clicking during typing
+
             const nextBtn = document.getElementById('nextBtn');
             const storyText = document.getElementById('storyText');
 
@@ -429,25 +485,21 @@
 
             try {
                 // Make request to Flask backend
-                const response = await fetch('/jupiter_story', {
+                const response = await fetch('/jupiter', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        story_part: currentStoryPart + 1
+                        story_part: currentStoryPart
                     })
                 });
 
                 if (response.ok) {
                     const data = await response.json();
+                    const newText = data.message || data.text || 'Story continues...';
 
-                    // Update story text with fade effect
-                    storyText.style.opacity = '0.5';
-                    setTimeout(() => {
-                        storyText.textContent = data.message || data.text || 'Story continues...';
-                        storyText.style.opacity = '1';
-                    }, 300);
+                    await typeText(storyText, newText, 25);
 
                     // Update progress
                     currentStoryPart++;
@@ -470,7 +522,7 @@
 
             } catch (error) {
                 console.error('Error:', error);
-                storyText.textContent = 'Error loading story. Please try again.';
+                await typeText(storyText, 'Error loading story. Please try again.', 40);
             } finally {
                 // Re-enable button
                 if (currentStoryPart < totalParts) {
@@ -503,8 +555,18 @@
 
         // Navigate back to home
         function goHome() {
-            window.location.href = '/';  // Adjust this URL based on your Flask routing
+            if (isTyping) return; // Prevent navigation during typing
+            window.location.href = '/';
         }
+
+        // Skip typing animation on click
+        document.getElementById('storyText').addEventListener('click', () => {
+            if (isTyping) {
+                // Fast-forward typing by reducing the global speed
+                // This could be enhanced further to instantly complete typing
+                isTyping = false;
+            }
+        });
 
         // Initialize
         createStars();
