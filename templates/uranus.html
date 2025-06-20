@@ -7,6 +7,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600;800&display=swap');
 
+        html, body {
+            height: 100vh;
+            overflow: hidden;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -75,15 +80,15 @@
         .story-container {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            height: 100vh;
             position: relative;
             z-index: 1;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         .story-title {
             font-family: 'Orbitron', monospace;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
             font-weight: 900;
             text-align: center;
             background: linear-gradient(45deg, #00bfff, #87ceeb, #4682b4, #1e90ff);
@@ -93,8 +98,9 @@
             background-clip: text;
             animation: glacialShift 5s ease-in-out infinite;
             text-shadow: 0 0 30px rgba(0, 191, 255, 0.4);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             letter-spacing: 0.15em;
+            flex-shrink: 0;
         }
 
         @keyframes glacialShift {
@@ -107,14 +113,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             position: relative;
+            min-height: 0;
         }
 
         .uranus-system {
             position: relative;
-            width: clamp(300px, 35vw, 450px);
-            height: clamp(300px, 35vw, 450px);
+            width: clamp(250px, 28vw, 350px);
+            height: clamp(250px, 28vw, 350px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -122,8 +129,8 @@
         }
 
         .uranus-planet {
-            width: clamp(180px, 22vw, 300px);
-            height: clamp(180px, 22vw, 300px);
+            width: clamp(150px, 18vw, 250px);
+            height: clamp(150px, 18vw, 250px);
             background: radial-gradient(circle at 25% 25%,
                 #e0f6ff 0%,
                 #87ceeb 15%,
@@ -200,31 +207,31 @@
         }
 
         .ring:nth-child(1) {
-            width: clamp(260px, 32vw, 420px);
-            height: clamp(260px, 32vw, 420px);
+            width: clamp(210px, 26vw, 320px);
+            height: clamp(210px, 26vw, 320px);
             border-color: rgba(0, 191, 255, 0.7);
             box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
         }
 
         .ring:nth-child(2) {
-            width: clamp(280px, 34vw, 450px);
-            height: clamp(280px, 34vw, 450px);
+            width: clamp(230px, 28vw, 350px);
+            height: clamp(230px, 28vw, 350px);
             border-color: rgba(135, 206, 235, 0.5);
             box-shadow: 0 0 12px rgba(135, 206, 235, 0.3);
             animation-duration: 48s;
         }
 
         .ring:nth-child(3) {
-            width: clamp(300px, 36vw, 480px);
-            height: clamp(300px, 36vw, 480px);
+            width: clamp(250px, 30vw, 380px);
+            height: clamp(250px, 30vw, 380px);
             border-color: rgba(70, 130, 180, 0.4);
             box-shadow: 0 0 10px rgba(70, 130, 180, 0.2);
             animation-duration: 52s;
         }
 
         .ring:nth-child(4) {
-            width: clamp(320px, 38vw, 510px);
-            height: clamp(320px, 38vw, 510px);
+            width: clamp(270px, 32vw, 410px);
+            height: clamp(270px, 32vw, 410px);
             border-color: rgba(30, 144, 255, 0.3);
             box-shadow: 0 0 8px rgba(30, 144, 255, 0.15);
             animation-duration: 55s;
@@ -251,23 +258,29 @@
             background: linear-gradient(135deg, rgba(26, 40, 71, 0.9), rgba(44, 90, 160, 0.9));
             border: 2px solid #00bfff;
             border-radius: 20px;
-            padding: 2rem;
-            margin-top: auto;
+            padding: 1.5rem;
             backdrop-filter: blur(15px);
             box-shadow: 0 0 40px rgba(0, 191, 255, 0.3);
+            flex-shrink: 0;
+            max-height: 35vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .story-text {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            min-height: 120px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            min-height: 80px;
+            max-height: 120px;
             padding: 1rem;
             background: rgba(0, 20, 40, 0.6);
             border-radius: 10px;
             border: 1px solid rgba(0, 191, 255, 0.4);
             color: #e0f6ff;
             position: relative;
+            overflow-y: auto;
+            flex: 1;
         }
 
         .typing-cursor {
@@ -292,13 +305,14 @@
             align-items: center;
             gap: 1rem;
             flex-wrap: wrap;
+            flex-shrink: 0;
         }
 
         .next-btn {
             font-family: 'Orbitron', monospace;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            padding: 0.8rem 2rem;
+            padding: 0.6rem 1.5rem;
             background: linear-gradient(45deg, #00bfff, #87ceeb);
             border: none;
             border-radius: 25px;
@@ -308,7 +322,7 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             box-shadow: 0 0 25px rgba(0, 191, 255, 0.4);
-            min-width: 120px;
+            min-width: 100px;
         }
 
         .next-btn:hover {
@@ -324,9 +338,9 @@
 
         .home-btn {
             font-family: 'Orbitron', monospace;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            padding: 0.6rem 1.5rem;
+            padding: 0.5rem 1.2rem;
             background: linear-gradient(45deg, #4682b4, #1e90ff);
             border: none;
             border-radius: 20px;
@@ -347,12 +361,12 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #00bfff;
         }
 
         .progress-bar {
-            width: 100px;
+            width: 80px;
             height: 4px;
             background: rgba(0, 191, 255, 0.2);
             border-radius: 2px;
@@ -421,11 +435,11 @@
         /* Responsive design */
         @media (max-width: 768px) {
             .story-container {
-                padding: 1rem;
+                padding: 0.5rem;
             }
 
             .story-interface {
-                padding: 1.5rem;
+                padding: 1rem;
             }
 
             .story-controls {
@@ -443,7 +457,7 @@
             }
 
             .uranus-system {
-                transform: rotate(-98deg) scale(0.8);
+                transform: rotate(-98deg) scale(0.7);
             }
         }
 
