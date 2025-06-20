@@ -310,7 +310,54 @@ def pluto_story():
 
 @app.route("/saturn", methods=["GET", "POST"])
 def saturn_story():
-    return render_template("saturn.html")
+    story = [
+        "Narrator: Draped in golden rings and whispers of gas, Saturn spins — graceful, distant, admired… and tired.",
+        "Venus: (gazing upward) Saturn… you always look so majestic.",
+        "Earth: Like royalty. The rings, the glow… You’re the showstopper of the system.",
+        "Saturn: (smiling softly) Beauty can be a burden. Sometimes I wonder if that’s all you see.",
+        "Mercury: Well, I mean… it’s hard not to stare. You're literally wearing a crown!",
+        "Mars: No one else has that kind of presence. You command space.",
+        "Saturn: (wistfully) And yet… no one asks what it’s like to carry it.",
+        "Jupiter: Carry it?",
+        "Saturn: These rings — they’re not decoration. They’re debris. Broken moons. Shattered promises. I didn’t choose them. I inherited them.",
+        "Neptune: A graveyard orbiting beauty… I understand now.",
+        "Uranus: They call them stunning. But they’re scars.",
+        "Saturn: Yes. And every time they sparkle, I remember what was lost.",
+        "Earth: But you never showed it. You always seemed… peaceful.",
+        "Saturn: (quietly) I had to. When you're admired, you don’t get to fall apart. Everyone looks to you — and expects grace.",
+        "Mercury: That’s heavy…",
+        "Venus: Maybe you’ve been performing elegance while carrying grief.",
+        "Saturn: I am the keeper of time, the planet of discipline. I spin slowly, not because I’m lazy — but because I’m deliberate. Because I remember.",
+        "Jupiter: You’ve always been the wise one… I never thought wisdom could hurt.",
+        "Saturn: Wisdom is forged in patience, in watching others burn and break. I’ve seen it all… and I’ve held the line.",
+        "Mars: So behind the rings… there’s more storm than stillness?",
+        "Saturn: Storms that rage for centuries. Winds faster than bullets. Pressure that could crush steel.",
+        "Earth: We only saw the beauty. Never the battle beneath it.",
+        "Saturn: Most do. That’s the curse of appearing perfect.",
+        "Narrator: And in that moment, the planets look at Saturn not as an icon — but as someone real. Someone who bore the weight of admiration and silence.",
+        "Mercury: We should’ve asked sooner… not just stared from afar.",
+        "Saturn: (smiling faintly) It’s all right. Admiration isn’t a crime. But understanding? That’s a gift.",
+        "Neptune: You are not just the ringed one. You are the one who remembers.",
+        "Jupiter: And holds it all with dignity.",
+        "Narrator: Saturn may wear rings, but they’re not decorations — they’re remains of moons, of moments, of memory.",
+        "Narrator: What looks like beauty is built from loss — broken pieces orbiting in silence, held with grace.",
+        "Narrator: He isn’t just the one with rings. He is the one who remembers... and never lets go.",
+        "Narrator: Saturn’s rings are made of ice and rock — remnants of moons torn apart by gravity.",
+        "Narrator: Despite its elegance, Saturn has storms that can last for years and encircle the entire planet.",
+        "Narrator: Beneath the clouds lies pressure strong enough to crush metal — silence hiding immense force.",
+        "Narrator: Its winds reach up to 1,800 km/h, faster than any hurricane on Earth.",
+        "Narrator: And while it looks slow, Saturn completes a full rotation in just 10 hours — one of the fastest spinners in the solar system."
+    ]
+
+    if request.method == "POST":
+        data = request.get_json()
+        story_part = data.get("story_part")
+
+        return jsonify({
+            "text": story[story_part]
+        })
+
+    return render_template("saturn.html", story = story[0])
 
 
 @app.route("/uranus", methods=["GET", "POST"])
