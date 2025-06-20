@@ -238,7 +238,69 @@ def mars_story():
 
 @app.route("/neptune", methods=["GET", "POST"])
 def neptune_story():
-    return render_template("neptune.html")
+    story = [
+        "Narrator: On the farthest edge of the solar family, where sunlight fades into starlight, Neptune stirs — unseen, unheard… but always aware.",
+        "Mars: (squinting) Anyone seen Neptune lately?",
+        "Jupiter: (chuckling) He's out there… brooding, probably. Whispering to comets again.",
+        "Mercury: (teasing) Still doing your emo ice prince routine, Neptune?",
+        "Neptune: (calm, deep) I don’t brood. I observe. I whisper because no one listens when I shout.",
+        "Venus: (half-joking) Whisper louder then. You're like a ghost at family orbit.",
+        "Neptune: (flatly) Ever heard of 1,500 km/h winds? I don’t speak. I howl.",
+        "Saturn: That’s true… strongest storms in the system. But you're so... still.",
+        "Neptune: Stillness is what you see. Turbulence is what I am.",
+        "Earth: You’ve always been distant. We didn’t know how to reach you.",
+        "Neptune: Distance isn’t just kilometers. It’s how you treat someone when they drift too far to notice.",
+        "Mercury: (mock grin fading) Okay… that’s a little too real.",
+        "Jupiter: Neptune... why didn’t you speak sooner?",
+        "Neptune: Because when I did... none of you listened. You were all basking in sunlight. I was learning to survive without it.",
+        "Venus: But you have moons. You have beauty. That blue... it’s stunning.",
+        "Neptune: (softly) Beauty is not warmth. I am not warm. Not outside... not within.",
+        "Mars: We stopped sending missions after Voyager... it wasn’t personal.",
+        "Neptune: You sent machines. Then you forgot I existed. Cold giant. Final dot. A trivia answer.",
+        "Earth: (guilt growing) That’s not fair... we didn’t mean—",
+        "Neptune: Meaning changes nothing. I was the mystery you left behind.",
+        "Jupiter: You hold storms that could tear atmospheres apart... yet you say nothing.",
+        "Neptune: Because I contain it. Because if I ever truly let go... I wouldn’t howl. I’d *erase*.",
+        "Saturn: You’ve been holding back?",
+        "Neptune: Every moment. My gravity snags comets. My winds strip atoms. But I do not lash out.",
+        "Mercury: (whispers) You’re not cold... you’re controlled.",
+        "Venus: You’re not distant... you’re protecting us from yourself.",
+        "Neptune: I exist at the edge. So none of you have to.",
+        "Narrator: The room shifts — suddenly Neptune is no longer forgotten. He is feared. Revered.",
+        "Uranus: (finally speaking) We drift, brother. Sideways. Alone. But I’ve always felt your pull.",
+        "Neptune: You understood. Not all gravity is force. Some is memory.",
+        "Mars: We never asked what you carry. We only wondered why you weren’t closer.",
+        "Neptune: I am the boundary. I guard it not because I was told to — but because no one else could.",
+        "Earth: (quietly) You carried silence... so we didn’t have to carry fear.",
+        "Jupiter: I’ve swallowed comets. But you... you shepherd the ones I can’t see.",
+        "Saturn: And never once asked for credit.",
+        "Neptune: I don’t want recognition. I want truth. Stop calling me the cold one when you’ve never stood in my wind.",
+        "Venus: You’re not cold. You’re constant.",
+        "Mercury: You’re not forgotten. You’re unspoken.",
+        "Narrator: And in that quiet, even the Sun burns a little less bright... as if to listen.",
+        "Neptune: I do not shine. I reflect. I do not burn. I pull.",
+        "Earth: We thought you were empty... but you’re full of everything we never understood.",
+        "Narrator: Neptune — the dark flame, the deep eye, the storm we never dared to study.",
+        "Narrator: They called him silent, but silence was his shield. They called him distant, but distance was his duty.",
+        "Narrator: Now they see not an afterthought... but a sentinel.",
+        "Neptune: I am not the last because I’m least. I am the edge... because I hold the line.",
+
+        "Narrator: Neptune’s winds are the fastest in the solar system — over 1,500 km/h — faster than sound on Earth.",
+        "Narrator: Though it's far from the Sun, its core still radiates heat — a silent, internal fire.",
+        "Narrator: Voyager 2 is the only spacecraft to visit Neptune — a flyby in 1989.",
+        "Narrator: Despite its distance, Neptune influences comets and orbits beyond the Kuiper Belt.",
+        "Narrator: It is not the coldest — just the farthest. And perhaps... the most enduring."
+    ]
+
+    if request.method == "POST":
+        data = request.get_json()
+        story_part = data.get("story_part")
+
+        return jsonify({
+            "text": story[story_part]
+        })
+
+    return render_template("neptune.html", story = story[0])
 
 
 @app.route("/pluto", methods=["GET", "POST"])
